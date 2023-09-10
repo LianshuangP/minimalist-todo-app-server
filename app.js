@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors'); 
 const authRoutes = require('./routes/auth');
 const loginRoutes = require('./routes/login');
 const todoRoutes = require('./routes/todo');
@@ -31,12 +32,12 @@ mongoose.connect(connectionString, {
 
 // middleware
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(cors());
 app.use(express.static('public'));
-app.set('view engine', 'ejs');
 
 // routes
-app.use('/', authRoutes);
+app.use('/auth', authRoutes); 
 app.use('/login', loginRoutes);
 app.use('/todo', todoRoutes);
 

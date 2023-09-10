@@ -2,10 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Todo = require('../models/Todo');
-
-router.get('/', (req, res) => {
-    res.render('login');
-});
+const Category = require('../models/Category');
 
 
 router.post('/', async (req, res) => {
@@ -15,7 +12,7 @@ router.post('/', async (req, res) => {
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
-        res.redirect('/todo');
+        res.json({ message: 'Login successful' });
     } catch (error) {
         res.status(500).json({ error: 'Login failed' });
     }
